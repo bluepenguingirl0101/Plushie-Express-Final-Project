@@ -1,89 +1,52 @@
 /******************************************************************************
-* MagicWord.cpp
-* Elizabeth Dennison
+* Plushie_Express_MagicWord.cpp
+*
+* MagicWord class definition
 * CS 281-0798, Fall 2020
-* November 15, 2020
+*
+* >>> Week 7 STARTER FILE <<<
 *
 *******************************************************************************
 */
-
 #include <string>
 
 #include "Plushie_Express_MagicWord.h"
+#include "Plushie_Express_CarryIt.h"
 
+int MagicWord::m_mCount = 0;
 
-/*******************************************************************************
-* MagicWord(string mName)
-*
-* overload constructor
-********************************************************************************
-*/
-MagicWord::MagicWord(std::string mName)
+//***********************************************************
+// MagicWord(string tName)
+//
+// overload constructor
+//
+// tName is a call by value string parameter
+// to allow passing string literals
+//***********************************************************
+MagicWord::MagicWord(const std::string& mName, int points)
 {
-	m_name = mName;
-	m_magicWordText = "After you utter the magic word...";
-	m_points = 300;
+    // track instance count
+    m_mCount++;
+
+    m_id = MAGICWORD_CARRYIT;
+    m_name = mName;
+    m_points = points;
+}
+
+//***********************************************************
+// MagicWord()
+//
+// constructor
+//***********************************************************
+MagicWord::MagicWord() : MagicWord("magicword", MAGICWORD_POINTS)
+{ 
 
 }
 
-/*******************************************************************************
-* MagicWord()
-*
-* constructor
-********************************************************************************
-*/
-MagicWord::MagicWord() {}
-
-/*******************************************************************************
-* bool setMagicWordName(string mName)
-********************************************************************************
-*/
-bool MagicWord::setMagicWordName(std::string& mName)
+//***********************************************************
+// getMagicWordCount() : return static instance count 
+//***********************************************************
+int MagicWord::getMagicWordCount() const
 {
-	m_name = mName;
-	return true;
-}
-/*******************************************************************************
-* bool getMagicWordName(string& mName) const
-********************************************************************************
-*/
-bool MagicWord::getMagicWordName(std::string& mName) const
-{
-	mName = m_name;
-	return true;
-}
-/*******************************************************************************
-* bool setMagicWordPoints(int mPoints)
-********************************************************************************
-*/
-bool MagicWord::setMagicWordPoints(int mPoints)
-{
-	m_points = mPoints;
-	return true;
-}
-/*******************************************************************************
-* int getMagicWordPoints() const
-********************************************************************************
-*/
-int MagicWord::getMagicWordPoints() const
-{
-	return m_points;
-}
-/*******************************************************************************
-* bool setMagicWordText(string& mText)
-********************************************************************************
-*/
-bool MagicWord::setMagicWordText(std::string& mText)
-{
-	m_magicWordText = mText;
-	return true;
-}
-/*******************************************************************************
-* bool getMagicWordText(string& mText)
-********************************************************************************
-*/
-bool MagicWord::getMagicWordText(std::string& mText) const
-{
-	mText = m_magicWordText;
-	return true;
+    return m_mCount;
 }

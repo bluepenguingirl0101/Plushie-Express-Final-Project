@@ -9,11 +9,8 @@
 #include <cstdlib>
 
 #include "Plushie_Express_CarryIt.h"
-#include "Plushie_Express_MagicWord.h"
 
 // default carryable element characteristics
-constexpr int MAX_POWER = 5;
-constexpr int MIN_POWER = 3;
 
 //***********************************************************
 // CarryIt()
@@ -25,7 +22,7 @@ CarryIt::CarryIt()
     m_id = GENERIC_CARRYIT;
     m_name = "carry me";
 
-    m_power = rand() % MAX_POWER + MIN_POWER;
+    m_power = 0;
     m_roomInfo = 0;
     m_playerInfo = 0;
 }

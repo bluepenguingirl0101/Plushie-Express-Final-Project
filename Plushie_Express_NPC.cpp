@@ -1,5 +1,5 @@
 /******************************************************************************
-* Plushie_Express_NPC.cpp
+* Plushie_Express_Treasure.cpp
 *
 * NPC class definition
 * CS 281-0798, Fall 2020
@@ -8,39 +8,38 @@
 *
 *******************************************************************************
 */
-#include <iostream>
-#include <vector>
+#include <string>
 
-#include "Plushie_Express_Treasure.h"
-#include "Plushie_Express_Weapons.h"
 #include "Plushie_Express_NPC.h"
+#include "Plushie_Express_CarryIt.h"
 
 int NPC::m_nCount = 0;
 
 //***********************************************************
-// NPC(std::string name)
+// NPC(string tName)
 //
 // overload constructor
-// 
-// lrc changed for Week 6
-//      name is now a call by value parameter
-//      to allow NPC("NPC") call (see NPC() below)
+//
+// tName is a call by value string parameter
+// to allow passing string literals
 //***********************************************************
-NPC::NPC(const std::string& name, int points)
+NPC::NPC(std::string name, int points)
 {
+    // track instance count
     m_nCount++;
 
-    m_id = NPC_CONTAINER;
+    m_id = NPC_CARRYIT;
     m_name = name;
     m_points = points;
+}
 
-
-    // initialize NPC text to known values
-    m_NPCTextArray[NPC_TALK] = "talking";
-
-    // lrc added for Week 6
-    // initialize NPC pointers
-    m_nextNPCPtrArray[NPC_TALK] = nullptr;
+//***********************************************************
+// NPC()
+//
+// overload constructor 2 of 2
+//***********************************************************
+NPC::NPC(std::string name) : NPC(name, NPC_POINTS)
+{
 
 }
 
@@ -61,43 +60,5 @@ int NPC::getNPCCount() const
 {
     return m_nCount;
 }
-
-//***********************************************************
-// setNPCText()
-//***********************************************************
-void NPC::setNPCText(int npc, const std::string& str)
-{
-    m_NPCTextArray[npc] = str;
-}
-
-//***********************************************************
-// getNPCNPCText()
-//***********************************************************
-std::string& NPC::getNPCText(int npc, std::string& str) const
-{
-    return str = m_NPCTextArray[npc];
-}
-
-//***********************************************************
-// setNPCPtr()
-//
-// set the pointer to the next NPC in this npc
-//***********************************************************
-void NPC::setNPCPtr(int npc, NPC* pNPC)
-{
-    m_nextNPCPtrArray[npc] = pNPC;
-}
-
-//***********************************************************
-// getNPCPtr()
-//
-// return pointer to the next NPC in given npc
-//***********************************************************
-NPC* NPC::getNPCPtr(int npc) const
-{
-    return m_nextNPCPtrArray[npc];
-}
-
-
 
 

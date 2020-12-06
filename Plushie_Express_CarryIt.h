@@ -18,7 +18,7 @@ int constexpr WEAPON_CARRYIT = 'w';
 int constexpr BOGIE_CARRYIT = 'b';
 int constexpr BOGEY_CARRYIT = 'd';
 int constexpr GENERIC_CARRYIT = 'c';
-int constexpr MAGIC_CARRYIT = 'm';
+int constexpr MAGICWORD_CARRYIT = 'm';
 int constexpr NPC_CARRYIT = 'n';
 
 //----------------------------------------------------------

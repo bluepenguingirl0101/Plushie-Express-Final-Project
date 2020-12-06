@@ -12,7 +12,7 @@
 
 #include "Plushie_Express_CarryIt.h"
 
-int constexpr MAGIC_POINTS = 300;
+int constexpr MAGICWORD_POINTS = 300;
 
 //----------------------------------------------------------
 // MagicWord class
@@ -22,7 +22,7 @@ class MagicWord : public CarryIt
 private:
     int m_usesRemaining;
 
-    static int m_wCount; // how many instances exist in game
+    static int m_mCount; // how many instances exist in game
 
 public:
     MagicWord();

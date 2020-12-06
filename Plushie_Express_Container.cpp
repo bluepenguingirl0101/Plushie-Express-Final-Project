@@ -33,7 +33,8 @@ Container::Container(const Container& rhsC)
     m_pTreasureV = rhsC.m_pTreasureV;  // accumulated Treasure
     m_pWeaponV = rhsC.m_pWeaponV;      // accumulated Weapons
     m_pBogeyV = rhsC.m_pBogeyV;        // accumulated Bogies
-
+    m_pMagicWordV = rhsC.m_pMagicWordV; 
+    m_pNPCV = rhsC.m_pNPCV;
 }
 
 //***********************************************************
@@ -238,6 +239,130 @@ int Container::getBogeyInfo(std::vector<Bogey*>& bV)
 void Container::removeAllBogey()
 {
     m_pBogeyV.clear();
+}
+
+//***********************************************************
+// addMagicWord()
+//***********************************************************
+int Container::addMagicWord(MagicWord* pM)
+{
+    m_pMagicWordV.push_back(pM);
+    return m_pMagicWordV.size();
+}
+
+//***********************************************************
+// removeMagicWord()
+//***********************************************************
+MagicWord* Container::removeMagicWord()
+{
+    return removeItem(m_pMagicWordV);
+}
+
+//***********************************************************
+// selectWeapon()
+//
+// if the Weapon vector is not empty,
+//      get the Weapon that matches the passed name string
+//***********************************************************
+MagicWord* Container::selectMagicWord(const std::string& mName)
+{
+    return selectItem(mName, m_pMagicWordV);
+}
+
+//***********************************************************
+// getMagicWordCount()
+//***********************************************************
+int Container::getMagicWordCount() const
+{
+    return m_pMagicWordV.size();
+}
+
+//***********************************************************
+// getWeaponInfo()
+//
+// copy Weapon vector elements to passed vector
+//
+// return number of Weapon elements 
+//***********************************************************
+int Container::getMagicWordInfo(std::vector<MagicWord*>& mV)
+{
+    return getItemInfo(mV, m_pMagicWordV);
+}
+
+//***********************************************************
+// removeAllMagicWord()
+//***********************************************************
+void Container::removeAllMagicWord()
+{
+    m_pMagicWordV.clear();
+}
+
+//***********************************************************
+// addNPC()
+//
+// adds a NPC instance pointer to the container's
+// vector of Bogie instance pointers
+//
+// returns the number of Weapons in the vector
+//***********************************************************
+int Container::addNPC(NPC* pN)
+{
+    m_pNPCV.push_back(pN);
+    return m_pNPCV.size();
+}
+
+//***********************************************************
+// removeNPC()
+//
+// if the Bogie vector is not empty,
+//  1) get the last Bogie in the vector
+//  2) remove one Bogie from vector
+//  3) return pointer to Bogie removed or nullptr
+//***********************************************************
+NPC* Container::removeNPC()
+{
+    return removeItem(m_pNPCV);
+}
+
+//***********************************************************
+// selectBogie()
+//
+// if the Bogie vector is not empty,
+//      get the Bogie that matches the passed name string
+//***********************************************************
+NPC* Container::selectNPC(const std::string& nName)
+{
+    return selectItem(nName, m_pNPCV);
+}
+
+//***********************************************************
+// getBogieCount()
+//
+// return number of Bogies in this Container
+//***********************************************************
+int Container::getNPCCount() const
+{
+    return m_pNPCV.size();
+}
+
+//***********************************************************
+// getBogieInfo()
+//
+// copy Bogie vector elements to passed vector
+//
+// return number of Bogie elements 
+//***********************************************************
+int Container::getNPCInfo(std::vector<NPC*>& nV)
+{
+    return getItemInfo(nV, m_pNPCV);
+}
+
+//***********************************************************
+// removeAllBogie()
+//***********************************************************
+void Container::removeAllNPC()
+{
+    m_pNPCV.clear();
 }
 
 //***********************************************************

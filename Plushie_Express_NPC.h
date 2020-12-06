@@ -9,51 +9,29 @@
 #define PLUSHIE_EXPRESS_NPC_H
 
 #include <string>
-#include <array>
-#include <vector>
 
-#include "Plushie_Express_Container.h"
+#include "Plushie_Express_Element.h"
 #include "Plushie_Express_CarryIt.h"
-#include "Plushie_Express_Treasure.h"
-#include "Plushie_Express_Weapons.h"
 
-int constexpr NPC_TEXT = 4;
 int constexpr NPC_POINTS = 100;
-int constexpr NPC_TALK = 1;
 
 //----------------------------------------------------------
-// NPC class: derived from CarryIt and Container classes
+// Bogey class: derived from CarryIt and Container classes
 //----------------------------------------------------------
-class NPC : public Container
+class NPC : public CarryIt
 {
-    private:
-        // how many instances exist in game
-        static int m_nCount;
+private:
+    static int m_nCount;
 
-        // text to display for each direction in Room
-        std::array <std::string, NPC_TEXT> m_NPCTextArray;
+public:
+    NPC();
+    NPC(std::string name);
+    NPC(std::string name, int points);
+    // Bogey instances will persist for app lifetime
+    // so destructor not needed
+    //~NPC();
 
-        // each Room* gives next Room in the given direction
-        std::array<NPC*, NPC_TEXT> m_nextNPCPtrArray;
+    int getNPCCount() const;
 
-        // messages for display on Player entry and exit
-        std::string m_NPCText;
-
-    public:
-        NPC();
-        NPC(const std::string& name, int points);
-        // NPC instances will persist for app lifetime
-        // so destructor not needed
-        //~NPC();
-
-        int getNPCCount() const;
-
-        void setNPCText(int npc, const std::string& str);
-        std::string& getNPCText(int npc, std::string& str) const;
-
-        // see direction constants above!
-        void setNPCPtr(int npc, NPC* pNPC);
-        NPC* getNPCPtr(int npc) const;
 };
-
 #endif

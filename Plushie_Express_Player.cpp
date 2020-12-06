@@ -21,11 +21,12 @@ int Player::m_pCount = 0;
 //
 // overload constructor
 //***********************************************************
-Player::Player(std::string& name)
+Player::Player(const std::string& name, int nLives)
 {
     m_pCount++;
     m_id = PLAYER_CONTAINER;
     m_name = name;
+    m_nLives = nLives;
 }
 
 //***********************************************************
@@ -33,8 +34,8 @@ Player::Player(std::string& name)
 //
 // overload constructor 2 of 2
 //***********************************************************
-Player::Player(const std::string& name)
-{ 
+Player::Player(const std::string& name) : Player(name, PLAYER_LIVES)
+{
 
 }
 
@@ -43,7 +44,7 @@ Player::Player(const std::string& name)
 //
 // constructor
 //***********************************************************
-Player::Player() : Player("player 1") 
+Player::Player() : Player("player 1", PLAYER_LIVES)
 {
 
 }
@@ -56,6 +57,30 @@ int Player::getPlayerCount() const
 { 
     return m_pCount; 
 }
+
+//***********************************************************
+// getLives()
+//***********************************************************
+int Player::getLives() const { return m_nLives; }
+
+//***********************************************************
+// setLives()
+//***********************************************************
+int Player::setLives(int n) { return m_nLives = n; }
+
+
+//***********************************************************
+// addLives()
+//***********************************************************
+int Player::addLives(int n) { return m_nLives += n; }
+
+
+//***********************************************************
+// loseLife()
+//***********************************************************
+int Player::loseLife() { return --m_nLives; }
+
+
 
 //***********************************************************
 // addRoomVisit()

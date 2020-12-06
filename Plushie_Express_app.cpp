@@ -6,8 +6,6 @@
 * CS 281 - 0798, Fall 2020
 *
 * Still need to:
-*  -impliment NPCs
-*  -impliment 'use' command 
 *  -impliment Secret Words (aka Magic Words)
 *  -impliment ending scene / detication 
 * 
@@ -82,7 +80,7 @@ int main()
     messageQueue.push_back("You don't remember how or even when you got on this train,");
     messageQueue.push_back("but you decide you should take a look around to see if anyone else knows anything.");
 
-    Player* pPlayer = new Player(playerName);
+    Player* pPlayer = new Player(playerName, PLAYER_LIVES);
     visitRoom(pPlayer, pRoom, messageQueue);
 
     getInventory(pRoom, messageQueue);
@@ -92,7 +90,6 @@ int main()
     int direction = ROOM_DEAD_END;
 
     Room* pNextRoom = nullptr;
-    NPC* pNPC = nullptr;
 
     // play the game!
     do
@@ -107,23 +104,30 @@ int main()
         // O)bserve command
         else if (userCmd == 'o')
             lookAllDirections(pRoom, messageQueue);
-        // T)alk command
-        else if (userCmd == 't')
-            talkPerson(pNPC, pRoom, messageQueue);
+        // S)peak command
+        else if (userCmd == 's')
+            talkPerson(pRoom, messageQueue);
         // G)et treasure command
         else if (userCmd == 'g')
-            grabTreasure(pPlayer, pRoom, messageQueue) + grabWeapon(pPlayer, pRoom, messageQueue);
-        // dR)op treasure command
+            grabTreasure(pPlayer, pRoom, messageQueue);
+        // T)ake weapon command  
+        else if (userCmd == 't')
+            grabWeapon(pPlayer, pRoom, messageQueue);
+        // D)rop treasure command
         else if (userCmd == 'd')
             dropTreasure(pPlayer, pRoom, messageQueue);
+        // dR)op weapon command
+        else if (userCmd == 'r')
+            dropWeapon(pPlayer, pRoom, messageQueue);
         // I)nfo command
         else if (userCmd == 'i')
             getAllInfo(pPlayer, pRoom, messageQueue);
-        //else if (userCmd == 'm')
-            //doMagicWord(pPlayer, pRoom, messageQueue);
+        // M)agic command
+        else if (userCmd == 'm')
+            doMagicWord(pPlayer, pRoom, messageQueue);
         // U)se command 
-        //else if (userCmd == 'u')
-            //userCmd = defendSelf(pPlayer, pRoom, messageQueue);
+        else if (userCmd == 'u')
+            userCmd = defendSelf(pPlayer, pRoom, messageQueue);
         // Q)uit command 
         else if (userCmd == 'q')
             messageQueue.push_back("Leaving so soon?");
@@ -174,8 +178,6 @@ void displayMessageQueue(std::vector<std::string>& msgQ)
 * return the direction constant
 *
 * otherwise return ROOM_DEAD_END
-*
-* #TODO add custom direction mappings here
 *******************************************************************************
 */
 int mapMoveCommand(char cmd)
@@ -210,7 +212,8 @@ char menuOption()
     std::cout << std::endl;
     std::cout << "What would you like to do? \n";
     std::cout << "F)orward, B)ack, R)ight, L)eft, O)bserve,\n";
-    std::cout << "G)et item(s), D)rop item, T)alk, U)se\n";
+    std::cout << "G)et item, D)rop item, T)ake weapon dR)op weapon\n";
+    std::cout << "S)peak, U)se M)agic\n";
     std::cout << "I)nfo, Q)uit ? ";
 
     // get user command

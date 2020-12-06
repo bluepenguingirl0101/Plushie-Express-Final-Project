@@ -38,7 +38,7 @@ Treasure::Treasure(const std::string& tName, int points)
 //
 // constructor
 //***********************************************************
-Treasure::Treasure() : Treasure("untold treasure", TREASURE_POINTS)
+Treasure::Treasure() : Treasure("treasure", TREASURE_POINTS)
 { }
 
 

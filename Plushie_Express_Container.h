@@ -20,7 +20,6 @@
 constexpr int ROOM_CONTAINER = 'R';
 constexpr int PLAYER_CONTAINER = 'P';
 constexpr int GENERIC_CONTAINER = 'C';
-constexpr int NPC_CONTAINER = 'N';
 
 class Container : public Element
 {
@@ -28,6 +27,8 @@ protected:
     std::vector<Treasure*> m_pTreasureV;  // accumulated Treasure
     std::vector<Weapon*> m_pWeaponV;      // accumulated Weapons
     std::vector<Bogey*> m_pBogeyV;        // accumulated Bogies
+    std::vector<MagicWord*> m_pMagicWordV;
+    std::vector<NPC*> m_pNPCV;
 
 public:
     Container();
@@ -47,7 +48,7 @@ public:
     void removeAllTreasure();
 
     // Weapon management
-    int addWeapon(Weapon* pT);
+    int addWeapon(Weapon* pW);
     Weapon* removeWeapon();
     Weapon* selectWeapon(const std::string& wName);
     int getWeaponCount() const;
@@ -61,6 +62,14 @@ public:
     int getBogeyCount() const;
     int getBogeyInfo(std::vector<Bogey*>& pBV);
     void removeAllBogey();
+
+    //NPC management 
+    int addNPC(NPC* pN);
+    NPC* removeNPC();
+    NPC* selectNPC(const std::string& nName);
+    int getNPCCount() const;
+    int getNPCInfo(std::vector<NPC*>& pNV);
+    void removeAllNPC();
 
     // Magic Word management 
     int addMagicWord(MagicWord* pM);

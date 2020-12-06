@@ -36,6 +36,7 @@ public:
 
     void setText(const std::string& text);
     std::string& getText(std::string& text) const;
+
 };
 
 #endif

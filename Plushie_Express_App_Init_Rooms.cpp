@@ -36,7 +36,10 @@ Room* initPassenger()
     pRoom->addTreasure(pTreasure);
 
     MagicWord* pMagicWord = new MagicWord("plushies", 300);
-    pMagicWord->setText("All of a sudden you see the room fill the stuffed animals!");
+    pMagicWord->setText("All of a sudden 3 plushies land in front of you:"
+        "\n" "a lion with the name 'Jared', "
+        "\n" "a leapord with the name 'Connor'," 
+        "\n" "and an owl with the name 'Garrett'");
     pRoom->addMagicWord(pMagicWord);
 
     return pRoom;

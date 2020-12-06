@@ -36,9 +36,9 @@ bool grabTreasure(Player* pP, Room* pR, std::vector<std::string>& msgQ)
         std::string str;
         std::stringstream ss;
         pB->getName(str);
-        msgQ.push_back(str + " looks at you. Something tells you that it's a bad idea to get the plush toy at this moment.");
+        msgQ.push_back("You notice that " + str + " looking at you. \nSomething tells you that it's a bad idea to get the plush toy at this moment.");
 
-        ss << "You got " << pB->getName(str) << " You got ";
+        ss << "You got " << pB->getName(str) << "\nYou got ";
 
         return false;
     }
@@ -55,7 +55,7 @@ bool grabTreasure(Player* pP, Room* pR, std::vector<std::string>& msgQ)
     // build message string with string stream
     std::string str;
     std::stringstream ss;
-    ss << "You got " << pT->getName(str) << " You got "
+    ss << "You got " << pT->getName(str) << "\nYou got "
         << pT->getPoints() << " points!";
 
     // add completed message string to caller's vector
@@ -113,7 +113,7 @@ bool grabWeapon(Player* pP, Room* pR, std::vector<std::string>& msgQ)
     // build message string with string stream
     std::string str;
     std::stringstream ss;
-    ss << "You now have a " << pW->getName(str) << ". you got "
+    ss << "You now have a " << pW->getName(str) << ". \nYou got "
         << pW->getPoints() << " points!";
 
     // copy completed message string to caller's vector
@@ -308,9 +308,10 @@ bool lookAllDirections(Room* pR, std::vector<std::string>& msgQ)
 * talkPerson()
 *******************************************************************************
 */
-bool talkPerson(Room* pR, std::vector<std::string>& msgQ)
+bool talkPerson(Player* pP, Room* pR, std::vector<std::string>& msgQ)
 {
-
+    int points = pR->getPoints();
+    pP->addPoints(points);
     NPC* pN = pR->removeNPC();
 
     if (pN == nullptr)
@@ -320,10 +321,13 @@ bool talkPerson(Room* pR, std::vector<std::string>& msgQ)
     }
 
     // build message string with string stream
+
+    int tPoints = pN->getPoints();
+
     std::string str;
     std::stringstream ss;
-    ss << "You decide to talk to  " << pN->getName(str) << ". "
-        "\n" << "You got " << pN->getPoints() << " points!";
+    ss << "You decide to talk to " << pN->getName(str) << ". "
+        "\n" << "You got " << tPoints << " points!";
 
     // copy completed message string to caller's vector
     msgQ.push_back(ss.str());
@@ -428,7 +432,7 @@ bool visitRoom(Player* pP, Room* pR, std::vector<std::string>& msgQ)
 //***********************************************************
 bool doMagicWord(Player* pP, Room* pR, std::vector<std::string>& msgQ)
 {    
-    std::cout << "What's the secret word you'd like to use?" "\n";
+    std::cout << "What's the mystery word you'd like to use?" "\n";
     std::string str; 
     std::cin >> str; 
 
@@ -438,22 +442,20 @@ bool doMagicWord(Player* pP, Room* pR, std::vector<std::string>& msgQ)
         int points = pR->getPoints();
         pP->addPoints(points);
 
-        // update Player Room visit history
         pP->addMagicWord(pM);
 
         // build greeting messages and queue for display
         std::string str, magicText;
-        msgQ.push_back("You say the secret word 'plush'." "\n" + pM->getText(magicText) + ".");
+        msgQ.push_back("You say the mystery word 'plushies'." "\n" + pM->getText(magicText) + ".");
 
-        // only award points for initial visit to each Room
-        if (pR->getPoints() > 0)
-        {
-            std::stringstream ss;
-            ss << points << " points for entering the secret word!\n";
+        int mPoints = pM->getPoints();
 
-            msgQ.push_back(ss.str());
-            pR->setPoints(0);
-        }
+        std::stringstream ss;
+        ss << "You gained " << mPoints << " points!";
+        msgQ.push_back(ss.str());
+
+            //std::stringstream ss;
+            //ss << points << " points for saying the secret " << magicText << "!\n";
 
         return true;
     }
@@ -469,14 +471,7 @@ bool doMagicWord(Player* pP, Room* pR, std::vector<std::string>& msgQ)
 
         // build greeting messages and queue for display
         std::string str, magicText;
-        msgQ.push_back("You say the secret word 'liz'." "\n" + pM->getText(magicText) + ".");
-
-        // check for Bogeys present
-        if (pR->getBogeyCount() == 0)
-        {
-            msgQ.push_back("No unfriendlies here..");
-            return true;
-        }
+        msgQ.push_back("You say the mystery word 'liz'." "\n" + pM->getText(magicText));
 
         // get last Bogey stored in vector
         std::vector<Bogey*> bV;
@@ -489,13 +484,13 @@ bool doMagicWord(Player* pP, Room* pR, std::vector<std::string>& msgQ)
 
         //if (bPower)
         //{
-            int bPoints = pB->getPoints();
+            int mPoints = pM->getPoints();
 
             std::stringstream ss;
-            ss << "You gained " << bPoints << " points!";
+            ss << "You gained " << mPoints << " points!";
             msgQ.push_back(ss.str());
 
-            pP->addPoints(bPoints);
+            pP->addPoints(mPoints);
             pR->removeBogey();
             pP->addBogey(pB);
 

@@ -106,7 +106,7 @@ int main()
             lookAllDirections(pRoom, messageQueue);
         // S)peak command
         else if (userCmd == 's')
-            talkPerson(pRoom, messageQueue);
+            talkPerson(pPlayer, pRoom, messageQueue);
         // G)et treasure command
         else if (userCmd == 'g')
             grabTreasure(pPlayer, pRoom, messageQueue);
@@ -116,8 +116,8 @@ int main()
         // D)rop treasure command
         else if (userCmd == 'd')
             dropTreasure(pPlayer, pRoom, messageQueue);
-        // dR)op weapon command
-        else if (userCmd == 'r')
+        // droP)weapon command
+        else if (userCmd == 'p')
             dropWeapon(pPlayer, pRoom, messageQueue);
         // I)nfo command
         else if (userCmd == 'i')
@@ -212,8 +212,8 @@ char menuOption()
     std::cout << std::endl;
     std::cout << "What would you like to do? \n";
     std::cout << "F)orward, B)ack, R)ight, L)eft, O)bserve,\n";
-    std::cout << "G)et item, D)rop item, T)ake weapon dR)op weapon\n";
-    std::cout << "S)peak, U)se M)agic\n";
+    std::cout << "G)et item, D)rop item, T)ake weapon, droP) weapon\n";
+    std::cout << "S)peak, U)se, M)ystery word\n";
     std::cout << "I)nfo, Q)uit ? ";
 
     // get user command

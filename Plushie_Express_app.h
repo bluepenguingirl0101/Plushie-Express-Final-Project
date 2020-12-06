@@ -45,7 +45,7 @@ bool grabWeapon(Player* pP, Room* pR, std::vector<std::string>& msgQ);
 bool dropWeapon(Player* pP, Room* pR, std::vector<std::string>& msgQ);
 char defendSelf(Player* pP, Room* pR, std::vector<std::string>& msgQ);
 bool lookAllDirections(Room* pR, std::vector<std::string>& msgQ);
-bool talkPerson(Room* pR, std::vector<std::string>& msgQ);
+bool talkPerson(Player* pP, Room* pR, std::vector<std::string>& msgQ);
 Room* movePlayer(Player* pP, Room* pR, int direction, std::vector<std::string>& msgQ);
 bool visitRoom(Player* pP, Room* pR, std::vector<std::string>& msgQ);
 //bool hasMagicWord(Player* pP, Room* pR, std::vector<std::string>& msgQ);

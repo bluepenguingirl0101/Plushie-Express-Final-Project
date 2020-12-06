@@ -26,7 +26,7 @@ Room* initPassenger()
     pRoom->setExitText("You walk out into the hallway of the train.");
     pRoom->setDirectionText(ROOM_FORWARD, "There is a nice comfy seat in front of you. On the seat is a plush guinea pig that looks directly at you.");
     pRoom->setDirectionText(ROOM_RIGHT, "There is a door to your right that leads out into a narrow hallway.");
-    pRoom->setDirectionText(ROOM_LEFT, "There is a beautiful view to the right of you of sceneary that is too fast to take in all the details");
+    pRoom->setDirectionText(ROOM_LEFT, "There is a beautiful view to the right of you. The sceneary is too fast to take in all the details.");
     pRoom->setDirectionText(ROOM_BACK, "There's a note on the table under the window that says, 'enjoy the ride~'.");
 
     // create and initialize Treasure instance
@@ -38,7 +38,7 @@ Room* initPassenger()
     MagicWord* pMagicWord = new MagicWord("plushies", 300);
     pMagicWord->setText("All of a sudden 3 plushies land in front of you:"
         "\n" "a lion with the name 'Jared', "
-        "\n" "a leapord with the name 'Connor'," 
+        "\n" "a leopard with the name 'Connor'," 
         "\n" "and an owl with the name 'Garrett'");
     pRoom->addMagicWord(pMagicWord);
 
@@ -58,20 +58,21 @@ Room* initHallway()
     pRoom->setEntryText("You walk into the hallway where there seems to be only one person in it looking out the window.");
     pRoom->setExitText("You leave the hallway and into the next room");
     pRoom->setDirectionText(ROOM_FORWARD, "In front of you, you see a door that leads into what seems to be the dinning room of the train.");
-    pRoom->setDirectionText(ROOM_LEFT, "To the left of you is your passenger car, but on the floor of the passenger car you see a small wolf plushie.");
+    pRoom->setDirectionText(ROOM_LEFT, "To the left of you is your passenger car, but on the floor of the passenger car you see a two small wolf plushies.");
     pRoom->setDirectionText(ROOM_BACK, "On the floor you see a pencil that has some teeth marks. Seems someone likes to chew their pencil.");
     pRoom->setDirectionText(ROOM_RIGHT, "To the right of you, you see a girl with a blonde ponytail, wearing a white t-shirt and blue shorts."
        "\n" "Her blue eyes look at you as if she has something she wants to tell you.");
 
     // create and initialize Treasure instance
     Treasure* pTreasure = new Treasure("two plush wolfs with a collar on each:" 
-        "\n" "one with the name 'Carlos' and one with the name 'Alex'.", 200);
+        "\n" "one with the name 'Carlos'" 
+        "\n" "and one with the name 'Alex'.", 200);
 
     // install Treasure pointer in Room's Treasure vector
     pRoom->addTreasure(pTreasure);
 
     // create and initialize Weapon instance
-    Weapon* pWeapon = new Weapon("a pencil with non-human teeth marks", 100);
+    Weapon* pWeapon = new Weapon("pencil with non-human teeth marks", 100);
     pWeapon->setText("You try using the pencil");
 
     // install Weapon pointer in Room's Weapon vector
@@ -81,7 +82,7 @@ Room* initHallway()
     NPC* pNPC = new NPC("the blonde girl to ask her about information..."
         "\n" "'Oh hi! My name's Kylie!'"
         "\n" "'No, sorry, I don't remember how or when on got on this train either...'"
-        "\n" "'Buuut, I DO remember seeing the word 'plushies' on the car in my room'"
+        "\n" "'Buuut, I DO remember seeing the word 'plushies' on a card in my room.'"
         "\n" "'I tried saying it in my room, but nothing happened for me...'", 100);
     // install NPC pointer in Room's NPC vector
     pRoom->addNPC(pNPC);
@@ -164,7 +165,7 @@ Room* initKitchen()
     pRoom->addTreasure(pTreasure);
 
     // create and initialize Bogie instance
-    Bogey* pBogey = new Bogey("grumpy plush chef", 100);
+    Bogey* pBogey = new Bogey("the grumpy plush chef", 100);
     pBogey->setText("You sew up the chef's fabric arm so it's good as new. It's a bit difficult since he does squirm a bit."
     "\n" "'Ah... thanks kid... name's Damon, uh... as thanks you can... you can take the stuffed sea lion on the counter.'"
     "\n" "'Also uh... boss lady in the next room, don't be so hard on her okay?'");
@@ -220,7 +221,7 @@ Room* initEngine()
     pRoom->addNPC(pNPC);
 
     MagicWord* pMagicWord = new MagicWord("liz", 300);
-    pMagicWord->setText("The second you say it, the conductor looks at you with an open mouth."
+    pMagicWord->setText("The second you say it, the conductor looks at you with an slightly agap mouth."
         "\n" "'You... how... that name... it's the... nickname my family gave me..."
         "\n" "The plushies you've found they... they're my family... we were turned into stuffed toys."
         "\n" "I was the only one who was given speech next to chef Damon.'"
@@ -228,8 +229,11 @@ Room* initEngine()
         "\n" "'I'm so sorry, I just... didn't want to be alone anymore."
         "\n" "I hope you and the rest of the passengers forgive me. But for now, please enjoy the rest of your ride!" 
         "\n" "We'll all be home soon!'"
-        "\n" "(Game Win!)"
-        "\n" "Deticated to both of my familes. Blood and friend.");
+        "\n"
+        "\n" "You Won!"
+        "\n"
+        "\n" "This game is deticated to both of my familes."
+        "\n" "Blood and friend.");
     pRoom->addMagicWord(pMagicWord);
 
     return pRoom;
